@@ -32,9 +32,15 @@ void dijkstra(int s)
     while(!q.empty())
     {
         ll v=q.top().F;
+        ll dist=q.top().S;
         q.pop();
+        
+        if(dist>d[v])
+            continue;
+        
         if(d[v]==INF)
             break;
+        
         for(auto edge : adj[v])
         {
             ll to=edge.F;
@@ -52,7 +58,6 @@ void dijkstra(int s)
 int main()
 {
     xlr8;
-
     int t;cin>>t;
     while(t--)
     {
