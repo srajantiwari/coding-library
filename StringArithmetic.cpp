@@ -71,24 +71,54 @@ string add(string s1,string s2)////////////////////////////addition of two strin
     return res;
 }
 
-string smul(string s1,string s2)////////////////////multiplication of two string s1 & s2 (s1>0 & s2>0)
+string multiply(string s1,string s2)
 {
-    string x="",y="";
-    int xlen=0,ylen=0;
-    if(s1.length()>s2.length())
-        x=s1,y=s2,xlen=s1.length(),ylen=s2.length();
-    else
-        x=s2,y=s1,xlen=s2.length(),ylen=s1.length();
+    bool neg=0;
+    if(s1[0]=='-')s1=s1.substr(1),neg=1;
+    if(s2[0]=='-')s2=s2.substr(1),neg=1-neg;
+    int a=s1.length(),b=s2.length();
 
-    string res="";
-    for(int i=ylen-1;i>=0;i--)
+    if(s1=="0" || s2=="0")
+        return "0";
+
+    vector <int> res(a+b);
+    int ia=0;
+    for(int i=a-1;i>=0;i--)
     {
-        string reshere=mul(x,y[i]-'0');
-        for(int j=0;j<(ylen-1-i);j++)
-        reshere=reshere+'0';
-        res=add(res,reshere);
+        int carry=0,ib=0;
+        int a1=s1[i]-'0';
+        for(int j=b-1;j>=0;j--)
+        {
+            int b1=s2[j]-'0';
+            int now=(a1*b1+carry+res[ia+ib]);
+            carry=now/10;
+            res[ia+ib]=now%10;
+            ib++;
+        }
+        if(carry>0)
+            res[ia+ib]+=carry;
+        ia++;
     }
-    return res;
+    for(auto to :res)
+        cout<<to;
+    cout<<endl;
+    string result="";
+    for(int i=0;i<(a+b);i++)
+        result=(char)(res[i]+'0')+result;
+    int in=0;
+    for(int i=0;i<(a+b);i++)
+    {
+        if(result[i]=='0')
+            continue;
+        else
+        {
+            in=i;
+            break;
+        }
+    }
+    result=result.substr(in);
+    if(neg)result='-'+result;
+    return result;
 }
 
 string divide(string s,int x)///////////////////division of a string s by a single digit x
