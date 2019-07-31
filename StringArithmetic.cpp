@@ -154,6 +154,6 @@ int main()
         string q;cin>>q;
         string res="";
         res=add(p,q);cout<<res<<endl;
-        res=smul(p,q);cout<<res<<endl;
+        res=multiply(p,q);cout<<res<<endl;
     }
 }
