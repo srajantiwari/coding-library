@@ -13,7 +13,7 @@ typedef long long ll;
 #define F                   first
 #define S                   second
 #define all(v)              (v).begin(),(v).end()
-#define pi					3.14159265359
+#define pi                  3.14159265359
 ll INF=1e18+10;
 ll MOD=1000000007;
 
@@ -55,14 +55,14 @@ int main()
 	int n;cin>>n;
 	int a[n];
 	rep(i,0,n)
-    {
-        cin>>a[i];
-        make_set(a[i]); // Always do this for DSU
-    }
+	{
+		cin>>a[i];
+		make_set(a[i]); // Always do this for DSU
+	}
 
     rep(i,2,n)
-        i&1 ? union_sets(a[0],a[i]) :   union_sets(a[1],a[i]);
+		i&1 ? union_sets(a[0],a[i]) : union_sets(a[1],a[i]);
 
     rep(i,0,n)
-        cout<<find_set(a[i])<<endl;
+		cout<<find_set(a[i])<<endl;
 }
